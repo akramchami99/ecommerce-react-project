@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
 
 const ProductList = () => {
-  const { addToCart } = useContext(AuthContext);
+  const { addToCart, user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -56,6 +57,14 @@ const ProductList = () => {
     });
   };
 
+  const handleAddToCart = (product) => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+    addToCart(product);
+  };
+
   return (
     <div className='product-list-main'>
       <h1>Products</h1>
@@ -101,7 +110,7 @@ const ProductList = () => {
               </Link>
               <p>${product.price}</p>
               <p>Rating: {product.rating.rate} ({product.rating.count} reviews)</p>
-              <button onClick={() => addToCart(product)}>Add to Cart</button>
+              <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
             </div>
           ))}
         </div>

@@ -10,6 +10,11 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
+    if (!username || !password) {
+      setError('Username and password are required');
+      return;
+    }
+
     fetch('https://fakestoreapi.com/auth/login', {
       method: 'POST',
       headers: {
@@ -17,20 +22,26 @@ const Login = () => {
       },
       body: JSON.stringify({ username, password })
     })
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) {
+        throw new Error('Invalid username or password');
+      }
+      return res.json();
+    })
     .then(data => {
       if (data.token) {
         fetch(`https://fakestoreapi.com/users`)
           .then(res => res.json())
           .then(users => {
             const user = users.find(u => u.username === username);
-            loginUser({ id: user.id, username: user.username, token: data.token });
+            loginUser({ id: user.id, username: user.username }, data.token);
             navigate('/');
           });
       } else {
         setError('Invalid username or password');
       }
-    });
+    })
+    .catch(err => setError(err.message));
   };
 
   return (
@@ -44,6 +55,7 @@ const Login = () => {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -52,6 +64,7 @@ const Login = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         <button onClick={handleLogin}>Login</button>
