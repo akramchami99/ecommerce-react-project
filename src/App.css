@@ -125,12 +125,12 @@ nav span {
 
 .cart-item > div, .cart-item > h2, .cart-item > p {
   padding: 2rem;
-  border-color: black;
-  border-width: 2px;
-  border-style: double;
   min-height: 2rem;
   display: flex;
   align-items: center;
+  background-color: rgba(245, 245, 245, 0.815);
+  -webkit-box-shadow: 0px 0px 10px 6px rgba(0,0,0,0.49); 
+  box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.49);
 }
 
 .cart-item > h2{
