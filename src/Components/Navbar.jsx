@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
+import { CartContext } from './CartContext';
 
 const Navbar = () => {
-  const { user, cart, logoutUser } = useContext(AuthContext);
+  const { user, logoutUser } = useContext(AuthContext);
+  const { cart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {

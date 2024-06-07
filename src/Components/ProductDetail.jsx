@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
+import { CartContext } from './CartContext';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const { addToCart , user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const { addToCart } = useContext(CartContext);
   const navigate = useNavigate();
 
   const handleAddToCart = (product) => {

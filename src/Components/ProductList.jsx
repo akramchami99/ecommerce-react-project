@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthContext';
+import { CartContext } from './CartContext';
 
 const ProductList = () => {
-  const { addToCart, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const { addToCart } = useContext(CartContext);
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
