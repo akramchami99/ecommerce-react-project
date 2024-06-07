@@ -34,7 +34,7 @@ const Login = () => {
           .then(res => res.json())
           .then(users => {
             const user = users.find(u => u.username === username);
-            loginUser({ id: user.id, username: user.username }, data.token);
+            loginUser({ id: user.id, username: user.name.firstname}, data.token);
             navigate('/');
           });
       } else {

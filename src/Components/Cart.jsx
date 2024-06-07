@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import { AuthContext } from './AuthContext';
 
 const Cart = () => {
-    const { cart, updateQuantity, emptyCart } = useContext(AuthContext);
+    const { cart, updateQuantity, emptyCart, validatePurchase } = useContext(AuthContext);
 
     const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+    
 
     return (
         <div className='cart-main'>
@@ -24,7 +26,8 @@ const Cart = () => {
                         </div>
                     ))}
                     <h2>Total: ${total.toFixed(2)}</h2>
-                    <button onClick={emptyCart}>Empty Cart</button>
+                    <button onClick={emptyCart}>Empty Cart</button><br/>
+                    <button onClick={validatePurchase}>Validate Purchase</button>
                 </div>
             )}
         </div>

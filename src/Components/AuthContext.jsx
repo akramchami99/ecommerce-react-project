@@ -98,8 +98,13 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('cart', JSON.stringify([]));
   };
 
+  const validatePurchase = () => {
+    emptyCart();
+    alert("Purchase Confirmed !!");
+}
+
   return (
-    <AuthContext.Provider value={{ user, cart, token, notification, loginUser, logoutUser, addToCart, updateQuantity, emptyCart }}>
+    <AuthContext.Provider value={{ user, cart, token, notification, loginUser, logoutUser, addToCart, updateQuantity, emptyCart, validatePurchase }}>
       {children}
     </AuthContext.Provider>
   );
